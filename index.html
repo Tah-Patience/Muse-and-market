@@ -140,7 +140,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
 
 /* toolbar */
-.toolbar{border-top:1px solid var(--line)}
+.toolbar{background:linear-gradient(90deg,#3A1442,#5B2364 50%,#3A1442);border-top:1px solid #B7791F;border-bottom:1px solid #B7791F;box-shadow:inset 0 1px 0 rgb(226 177 92 / .25)}
 .tb-row{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-block:8px;-webkit-overflow-scrolling:touch}
 /* moving toolbar */
 .tb-row.moving{display:block;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
@@ -149,11 +149,15 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 .tb-row:hover .tb-track,.tb-row.paused .tb-track{animation-play-state:paused}
 @keyframes tb-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .tb-row::-webkit-scrollbar{display:none}
-.tb-row a{flex:none;text-decoration:none;font-size:.86rem;font-weight:600;color:var(--muted);padding:8px 14px;border-radius:999px;white-space:nowrap}
-.tb-row a:hover{color:var(--ink);background:var(--sunk)}
-.tb-row a.on{background:var(--plum);color:var(--bg)}
-.tb-row small{font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-left:2px}
-.tb-row a.on small{color:var(--gold-soft)}
+.tb-row a{flex:none;text-decoration:none;font-family:var(--display);font-size:.98rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:8px 16px;border-radius:999px;white-space:nowrap;
+ background:linear-gradient(90deg,#E2B15C,#FFF1CC,#C9923A,#E2B15C);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+.tb-row a::before{content:"✦";margin-right:10px;font-size:.6em;vertical-align:.25em;-webkit-text-fill-color:#B7791F}
+.tb-row a:hover{background-color:rgb(255 255 255 / .06)}
+.tb-row a.on{background:linear-gradient(135deg,#E2B15C,#F7DFA4 55%,#C9923A);-webkit-background-clip:border-box;background-clip:border-box;color:#3A1442;animation:none;box-shadow:0 4px 14px rgb(0 0 0 / .3)}
+.tb-row a.on::before{-webkit-text-fill-color:#3A1442}
+.tb-row small{font-family:var(--body);font-size:.6rem;letter-spacing:.1em;margin-left:6px;padding:2px 6px;border-radius:999px;background:#E2B15C;-webkit-text-fill-color:#3A1442;vertical-align:.2em}
+.tb-row a.on small{background:#3A1442;-webkit-text-fill-color:#F7DFA4}
+.tb-row.moving{-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
 section,#soon{scroll-margin-top:130px}
 
 .pol p{max-width:70ch}
@@ -194,10 +198,10 @@ section,#soon{scroll-margin-top:130px}
 @media (prefers-reduced-motion:reduce){.product:hover .ph img{transform:none}}
 
 /* ---- lively extras ---- */
-.ann{background:var(--plum);color:var(--bg);overflow:hidden;white-space:nowrap;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.ann{background:linear-gradient(90deg,#E2B15C,#F7DFA4,#E2B15C);color:#3A1442;overflow:hidden;white-space:nowrap;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .ann-track{display:inline-flex;padding-block:9px;animation:tb-scroll 26s linear infinite}
 .ann-track span{padding-inline:18px}
-.ann-track span::after{content:"✦";color:var(--gold);margin-left:36px}
+ .ann-track span::after{content:"✦";color:#5B2364;margin-left:36px}
 .vitrine .slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease,transform 6s ease;transform:scale(1.06)}
 .vitrine .slide.on{opacity:1;transform:scale(1)}
 .vitrine{cursor:pointer}
@@ -217,16 +221,75 @@ section,#soon{scroll-margin-top:130px}
 .rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
 .rv.in{opacity:1;transform:none}
 .ph{transition:transform .35s ease,box-shadow .35s ease}
-.ph img{animation:breathe 9s ease-in-out infinite alternate;transform-origin:center 30%}
-.product:nth-child(3n+2) .ph img{animation-duration:11s;animation-delay:-3s}
-.product:nth-child(3n) .ph img{animation-duration:10s;animation-delay:-6s}
-@keyframes breathe{0%{transform:scale(1) translateY(0)}100%{transform:scale(1.08) translateY(-1.5%)}}
+.ph img{animation:kb1 6s ease-in-out infinite alternate;transform-origin:center 30%;will-change:transform}
+.product:nth-child(3n+2) .ph img{animation-name:kb2;animation-duration:7s;animation-delay:-2s}
+.product:nth-child(3n) .ph img{animation-name:kb3;animation-duration:6.5s;animation-delay:-4s}
+@keyframes kb1{0%{transform:scale(1.02) translate(0,0) rotate(0)}50%{transform:scale(1.14) translate(-4%,-2%) rotate(-1deg)}100%{transform:scale(1.2) translate(3%,-4%) rotate(1deg)}}
+@keyframes kb2{0%{transform:scale(1.18) translate(4%,-3%)}100%{transform:scale(1.04) translate(-4%,2%)}}
+@keyframes kb3{0%{transform:scale(1.05) translate(-3%,2%) rotate(1deg)}100%{transform:scale(1.2) translate(2%,-4%) rotate(-1.5deg)}}
+.ph .badge{z-index:2;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.ph::after{animation:sheen 4.5s ease-in-out infinite}
+.product:nth-child(2n) .ph::after{animation-delay:-2.2s}
+@keyframes sheen{0%,60%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
+.rv.in .ph{animation:pop .8s cubic-bezier(.2,.9,.3,1.3) both}
+@keyframes pop{0%{transform:scale(.88) rotate(-1.5deg)}100%{transform:none}}
+/* welcome */
+.welcome{font-family:var(--display);font-size:clamp(1.6rem,6vw,2.6rem);line-height:1.15;margin:0;display:flex;flex-wrap:wrap;column-gap:.3em;row-gap:0}
+.welcome .w{display:inline-flex}
+.welcome .l{display:inline-block;opacity:0;transform:translateY(.8em) rotate(8deg);filter:blur(6px);animation:letter .7s cubic-bezier(.2,.8,.2,1.2) forwards}
+.welcome .brand-w .l{background:linear-gradient(90deg,var(--plum),var(--gold),#E9C46A,var(--plum));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:letter .7s cubic-bezier(.2,.8,.2,1.2) forwards,shine 4s linear infinite}
+@keyframes letter{to{opacity:1;transform:none;filter:none}}
+@keyframes shine{to{background-position:300% 0}}
+.welcome-line{height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--plum));border-radius:3px;animation:grow 1.2s 1.6s ease forwards}
+@keyframes grow{to{width:min(260px,70%)}}
+.sparkle{position:relative}
+.sparkle::before{content:"✦";position:absolute;right:-.9em;top:-.2em;font-size:.55em;color:var(--gold);animation:twinkle 1.8s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(90deg)}}
 .product:hover .ph,.product:active .ph{transform:translateY(-6px);box-shadow:0 18px 40px rgb(91 35 100 / .28)}
 .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 40%,rgb(255 255 255 / .22) 50%,transparent 60%);transform:translateX(-120%);pointer-events:none}
 .product:hover .ph::after,.product:active .ph::after{transition:transform .9s ease;transform:translateX(120%)}
 .drawer img,.d-item img{animation:none}
-@media (prefers-reduced-motion:reduce){.ph img{animation:none}.ph{transition:none}.ann-track,.wa{animation:none}.rv{opacity:1;transform:none;transition:none}.vitrine .slide{transition:opacity .3s;transform:none}}
+@media (prefers-reduced-motion:reduce){.welcome .l{animation:none!important;opacity:1;transform:none;filter:none}.welcome-line{animation:none;width:min(260px,70%)}.ph .badge,.ph::after,.rv.in .ph{animation:none}.ph img{animation:none}.ph{transition:none}.ann-track,.wa{animation:none}.rv{opacity:1;transform:none;transition:none}.vitrine .slide{transition:opacity .3s;transform:none}}
+
+/* intro splash */
+#intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;text-align:center;padding:24px;color:#F4E9F2;cursor:pointer;
+ background:radial-gradient(120% 80% at 50% 40%,#7A3285 0%,#4A1B52 45%,#1A0F1D 100%);overflow:hidden;transition:transform 1s cubic-bezier(.7,0,.2,1),opacity 1s ease}
+#intro.out{transform:translateY(-100%);opacity:.6}
+#intro .in-box{display:grid;gap:14px;justify-items:center;position:relative;z-index:2}
+#intro .in-eyebrow{font:700 .72rem var(--body);letter-spacing:.35em;text-transform:uppercase;color:#E2B15C;opacity:0;animation:fadeUp .9s .2s ease forwards}
+#intro .in-welcome{font-family:var(--display);font-size:clamp(1.3rem,5vw,2rem);font-style:italic;opacity:0;animation:fadeUp 1s .5s ease forwards}
+#intro .in-brand{font-family:var(--display);font-size:clamp(2.8rem,13vw,6.5rem);line-height:1;margin:0;display:flex;flex-wrap:wrap;justify-content:center;column-gap:.25em}
+#intro .in-brand .l{display:inline-block;opacity:0;transform:translateY(.7em) scale(.6) rotate(-10deg);filter:blur(10px);
+ background:linear-gradient(90deg,#F4E9F2,#E2B15C,#FFF3D6,#E2B15C,#F4E9F2);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+ animation:letter .8s cubic-bezier(.2,.8,.2,1.3) forwards,shine 3s linear infinite}
+#intro .in-brand .amp{font-style:italic;color:#E2B15C}
+#intro .in-line{height:2px;width:0;background:linear-gradient(90deg,transparent,#E2B15C,transparent);animation:grow2 1.2s 1.8s ease forwards}
+@keyframes grow2{to{width:min(320px,70vw)}}
+#intro .in-tag{font-size:.95rem;opacity:0;color:#D9C3DC;animation:fadeUp 1s 2.1s ease forwards}
+#intro .in-skip{position:absolute;bottom:calc(28px + env(safe-area-inset-bottom,0px));left:0;right:0;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#BBA6BE;opacity:0;animation:fadeUp 1s 2.4s ease forwards}
+#intro .orb{position:absolute;border-radius:50%;filter:blur(40px);opacity:.55;animation:float 7s ease-in-out infinite alternate}
+#intro .o1{width:260px;height:260px;background:#B7791F;top:-60px;left:-60px}
+#intro .o2{width:320px;height:320px;background:#D6A2DF;bottom:-90px;right:-80px;animation-delay:-3s}
+#intro .o3{width:180px;height:180px;background:#E2B15C;top:55%;left:10%;animation-duration:9s;opacity:.35}
+@keyframes float{to{transform:translate(40px,-30px) scale(1.15)}}
+#intro .spark{position:absolute;color:#E2B15C;font-size:14px;opacity:0;animation:twinkle 2.2s ease-in-out infinite}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+body.intro-on{overflow:hidden}
+@media (prefers-reduced-motion:reduce){#intro *{animation-duration:.01s!important;animation-delay:0s!important}#intro{transition:opacity .4s}#intro.out{transform:none;opacity:0}}
 </style>
+
+<div id="intro" role="dialog" aria-label="Welcome to Muse &amp; Market" hidden>
+  <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="spark" style="left:12%;top:18%;animation-delay:0s">✦</span><span class="spark" style="left:82%;top:14%;animation-delay:0.6s">✦</span><span class="spark" style="left:70%;top:72%;animation-delay:1.2s">✦</span><span class="spark" style="left:20%;top:80%;animation-delay:0.3s">✦</span><span class="spark" style="left:90%;top:45%;animation-delay:1.6s">✦</span><span class="spark" style="left:45%;top:10%;animation-delay:0.9s">✦</span><span class="spark" style="left:8%;top:52%;animation-delay:1.9s">✦</span><span class="spark" style="left:58%;top:88%;animation-delay:0.5s">✦</span>
+  <div class="in-box">
+    <span class="in-eyebrow">Scents · Style · Stories</span>
+    <span class="in-welcome">Welcome to</span>
+    <p class="in-brand" id="inBrand">Muse &amp; Market</p>
+    <span class="in-line"></span>
+    <span class="in-tag">Perfumes, fashion &amp; stories, hand-picked for you</span>
+  </div>
+  <span class="in-skip">Tap to enter</span>
+</div>
 
 <header>
   <div class="wrap nav">
@@ -253,6 +316,8 @@ section,#soon{scroll-margin-top:130px}
 <div class="ann" aria-label="Announcements"><div class="ann-track"><span>New arrivals just in</span><span>Dresses from 5,000 FCFA</span><span>2-piece sets 7,000 FCFA</span><span>Men's wear from 8,000 FCFA</span><span>Delivery in 24–48h in the city</span><span>Pay with MTN or Orange Money</span><span aria-hidden="true">New arrivals just in</span><span aria-hidden="true">Dresses from 5,000 FCFA</span><span aria-hidden="true">2-piece sets 7,000 FCFA</span><span aria-hidden="true">Men's wear from 8,000 FCFA</span><span aria-hidden="true">Delivery in 24–48h in the city</span><span aria-hidden="true">Pay with MTN or Orange Money</span></div></div>
   <div class="wrap hero">
     <div class="hero-copy">
+      <p class="welcome" id="welcome" aria-label="Welcome to Muse &amp; Market">Welcome to <span class="brand-w sparkle">Muse &amp; Market</span></p>
+      <div class="welcome-line" aria-hidden="true"></div>
       <span class="eyebrow">Scents · Style · Stories</span>
       <h1>Wear something <em>lovely.</em> Read something real.</h1>
       <p class="lede">Hand-picked perfumes, shoes, dresses and little extras, plus a journal full of style tips, honest answers and stories worth your evening.</p>
@@ -673,6 +738,27 @@ document.getElementById('newsForm').addEventListener('submit',async e=>{
 });
 
 /* ---- lively extras ---- */
+/* soft chime (plays only when a visitor taps; phones block sound otherwise) */
+function chime(){try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const ac=new C(),t=ac.currentTime;
+ const out=ac.createGain();out.gain.value=.18;out.connect(ac.destination);
+ [[1046.5,0],[1318.5,.12],[1568,.24],[2093,.38]].forEach(([f,d])=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=f;
+  g.gain.setValueAtTime(0,t+d);g.gain.linearRampToValueAtTime(.5,t+d+.02);g.gain.exponentialRampToValueAtTime(.0008,t+d+1.6);
+  o.connect(g);g.connect(out);o.start(t+d);o.stop(t+d+1.7)});setTimeout(()=>ac.close(),2500)}catch(e){}}
+/* intro splash: once per visit */
+(()=>{const el=document.getElementById('intro');if(!el)return;
+ let seen=false;try{seen=sessionStorage.getItem('mm-intro')==='1'}catch(e){}
+ if(seen){el.remove();return}
+ const b=document.getElementById('inBrand');let n=0;
+ b.innerHTML='Muse & Market'.split(' ').map(w=>`<span style="display:inline-flex">${[...w].map(ch=>`<span class="l${ch==='&'?' amp':''}" style="animation-delay:${0.9+(n++)*0.08}s,${0.9+n*0.08}s">${ch==='&'?'&amp;':ch}</span>`).join('')}</span>`).join('');
+ el.hidden=false;document.body.classList.add('intro-on');
+ let done=false;const close=()=>{if(done)return;done=true;try{sessionStorage.setItem('mm-intro','1')}catch(e){}
+  el.classList.add('out');document.body.classList.remove('intro-on');setTimeout(()=>el.remove(),1100)};
+ el.addEventListener('click',()=>{chime();close()});setTimeout(close,matchMedia('(prefers-reduced-motion: reduce)').matches?1500:4200);
+})();
+(()=>{const w=document.getElementById('welcome');if(!w)return;let n=0;
+ const split=(txt,cls)=>txt.split(' ').filter(Boolean).map(word=>`<span class="w${cls?' '+cls:''}" aria-hidden="true">${[...word].map(ch=>`<span class="l" style="animation-delay:${(n++)*0.06}s${cls?`,${(n)*0.06+0.7}s`:''}">${ch==='&'?'&amp;':ch}</span>`).join('')}</span>`).join('');
+ w.innerHTML=split('Welcome to','')+`<span class="brand-w sparkle" style="display:inline-flex;column-gap:.3em" aria-hidden="true">${split('Muse & Market','')}</span>`;
+})();
 const calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
 // 1. hero slideshow: the perfume photo plus some of the clothes
 (()=>{const v=document.querySelector('.vitrine');if(!v)return;

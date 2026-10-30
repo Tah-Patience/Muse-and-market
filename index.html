@@ -216,7 +216,16 @@ section,#soon{scroll-margin-top:130px}
 @keyframes wa-pulse{0%{box-shadow:0 0 0 0 rgb(37 211 102 / .55),0 10px 30px rgb(0 0 0 / .25)}70%{box-shadow:0 0 0 16px rgb(37 211 102 / 0),0 10px 30px rgb(0 0 0 / .25)}100%{box-shadow:0 0 0 0 rgb(37 211 102 / 0),0 10px 30px rgb(0 0 0 / .25)}}
 .rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
 .rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.ann-track,.wa{animation:none}.rv{opacity:1;transform:none;transition:none}.vitrine .slide{transition:opacity .3s;transform:none}}
+.ph{transition:transform .35s ease,box-shadow .35s ease}
+.ph img{animation:breathe 9s ease-in-out infinite alternate;transform-origin:center 30%}
+.product:nth-child(3n+2) .ph img{animation-duration:11s;animation-delay:-3s}
+.product:nth-child(3n) .ph img{animation-duration:10s;animation-delay:-6s}
+@keyframes breathe{0%{transform:scale(1) translateY(0)}100%{transform:scale(1.08) translateY(-1.5%)}}
+.product:hover .ph,.product:active .ph{transform:translateY(-6px);box-shadow:0 18px 40px rgb(91 35 100 / .28)}
+.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 40%,rgb(255 255 255 / .22) 50%,transparent 60%);transform:translateX(-120%);pointer-events:none}
+.product:hover .ph::after,.product:active .ph::after{transition:transform .9s ease;transform:translateX(120%)}
+.drawer img,.d-item img{animation:none}
+@media (prefers-reduced-motion:reduce){.ph img{animation:none}.ph{transition:none}.ann-track,.wa{animation:none}.rv{opacity:1;transform:none;transition:none}.vitrine .slide{transition:opacity .3s;transform:none}}
 </style>
 
 <header>
@@ -604,29 +613,36 @@ if('IntersectionObserver' in window){
 }
 document.querySelectorAll('[data-open]').forEach(a=>a.addEventListener('click',()=>{const d=document.querySelector(a.getAttribute('href'));if(d)d.open=true}));
 // Journal: read posts from the Google Sheet "Muse & Market – Journal"
-const SHEET='https://docs.google.com/spreadsheets/d/1xPwCkmVjz6DUnJUT7r59x7hm-Q0snG7lLjXSz2ooDEQ/gviz/tq?tqx=out:csv';
+const SHEET_BASE='https://docs.google.com/spreadsheets/d/1xPwCkmVjz6DUnJUT7r59x7hm-Q0snG7lLjXSz2ooDEQ/gviz/tq?tqx=out:csv&gid=';
+const SHEET_MAIN=SHEET_BASE+'1510320403', SHEET_FORM=SHEET_BASE+'2041315820';
 function parseCSV(t){const rows=[];let r=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];
  if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
  else if(c==='"')q=true;else if(c===','){r.push(f);f=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;r.push(f);rows.push(r);r=[];f=''}else f+=c}
  if(f||r.length){r.push(f);rows.push(r)}return rows}
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const yes=v=>/^(y|yes|true|oui)$/i.test(String(v).trim());
-fetch(SHEET,{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.text()}).then(t=>{
- const rows=parseCSV(t);const head=rows.shift().map(h=>h.trim().toLowerCase());
- const col=n=>head.indexOf(n);const g=(r,n)=>(r[col(n)]||'').trim();
- const posts=rows.filter(r=>g(r,'title')&&(col('show')<0||!g(r,'show')||yes(g(r,'show'))));
+const getCSV=u=>fetch(u,{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>'');
+Promise.all([getCSV(SHEET_MAIN),getCSV(SHEET_FORM)]).then(([mainT,formT])=>{
+ const posts=[];
+ // stories sent through the Google Form (newest first). Columns: Timestamp, Title, Type, Summary, Full story, Members only
+ if(formT){const rows=parseCSV(formT);rows.shift();rows.reverse().forEach(r=>{const c=i=>(r[i]||'').trim();
+  if(c(1))posts.push({title:c(1),type:c(2),summary:c(3),full:c(4),ic:yes(c(5))})})}
+ // stories typed straight into the sheet
+ if(mainT){const rows=parseCSV(mainT);const head=rows.shift().map(h=>h.trim().toLowerCase());
+  const col=n=>head.indexOf(n);const g=(r,n)=>col(n)<0?'':(r[col(n)]||'').trim();
+  rows.forEach(r=>{if(!g(r,'title'))return;if(col('show')>=0&&g(r,'show')&&!yes(g(r,'show')))return;
+   posts.push({title:g(r,'title'),type:g(r,'type'),summary:g(r,'summary'),full:g(r,'full story'),ic:yes(g(r,'members only')||g(r,'inner circle'))})})}
  if(!posts.length)return;
- document.getElementById('posts').innerHTML=posts.map((r,i)=>{
-  const ic=yes(g(r,'members only')||g(r,'inner circle')),full=g(r,'full story');
-  const paras=full.split(/\n+/).filter(Boolean).map(x=>`<p>${esc(x)}</p>`).join('');
+ document.getElementById('posts').innerHTML=posts.map((x,i)=>{
+  const paras=x.full.split(/\n+/).filter(Boolean).map(t=>`<p>${esc(t)}</p>`).join('');
   return `<article class="post${i===0?' feature':''}">
-   <span class="kind">${esc(g(r,'type')||'Journal')}</span>
-   <h3>${esc(g(r,'title'))}</h3>
-   ${g(r,'summary')?`<p>${esc(g(r,'summary'))}</p>`:''}
-   ${ic?'<span class="lock">✦ Members Only: opening soon</span>'
-     :full?`<div class="full" hidden>${paras}</div><button class="more" type="button">Read more →</button>`:''}
+   <span class="kind">${esc(x.type||'Journal')}</span>
+   <h3>${esc(x.title)}</h3>
+   ${x.summary?`<p>${esc(x.summary)}</p>`:''}
+   ${x.ic?'<span class="lock">✦ Members Only: opening soon</span>'
+     :x.full?`<div class="full" hidden>${paras}</div><button class="more" type="button">Read more →</button>`:''}
   </article>`}).join('');
-}).catch(()=>{});
+});
 document.getElementById('posts').addEventListener('click',e=>{const b=e.target.closest('.more');if(!b)return;
  const f=b.previousElementSibling;f.hidden=!f.hidden;b.textContent=f.hidden?'Read more →':'Show less ↑'});
 

@@ -397,6 +397,33 @@ body::before{background:#3A1442}
 .soon-form .ok{flex-basis:100%}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media(max-width:600px){.tn{padding:10px 8px;font-size:.74rem;letter-spacing:.12em}.tn::after{left:8px;right:8px}.topnav{gap:0}.logo-mark{width:42px;height:42px}}
+
+/* ---- Nov 2026 b: big section titles, journal tabs, shop mix ---- */
+.sec-head .eyebrow,.ask .eyebrow{display:block;font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,8vw,3.2rem);line-height:1.05;letter-spacing:-.01em;text-transform:none;color:var(--plum)}
+.sec-head .eyebrow::after,.ask .eyebrow::after{content:"";display:block;width:64px;height:3px;margin-top:12px;border-radius:3px;background:linear-gradient(90deg,var(--gold),transparent)}
+section .sec-head h2,.ask h2{font-size:clamp(1.1rem,4.2vw,1.45rem);font-style:italic;font-weight:500;color:var(--muted)}
+.ann{margin-bottom:4px}
+button.ph{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inherit;color:inherit;text-align:left}
+.back-all{display:inline-flex;align-items:center;min-height:44px;margin-bottom:14px;padding:8px 16px;border-radius:999px;border:1px solid var(--plum);background:transparent;color:var(--plum);font:600 .88rem var(--body);cursor:pointer}
+.back-all:hover{background:var(--plum);color:var(--bg)}
+.jtabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:6px;margin-bottom:18px}
+.jtabs::-webkit-scrollbar{display:none}
+.jtab{flex:none;min-height:44px;padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:600 .92rem var(--body);cursor:pointer}
+.jtab[aria-selected="true"]{background:var(--plum);border-color:var(--plum);color:var(--bg)}
+.jlist{display:grid;gap:12px;max-width:760px}
+.jp{border:1px solid var(--line);border-radius:16px;background:var(--bg);overflow:hidden}
+.jp summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 20px}
+.jp summary::-webkit-details-marker{display:none}
+.jp-h{display:grid;gap:6px;min-width:0}
+.jp-h b{font-family:var(--display);font-weight:600;font-size:clamp(1.3rem,5vw,1.6rem);line-height:1.15;color:var(--ink)}
+.jp-h span{font-size:1rem;line-height:1.5;color:var(--muted)}
+.jp-go{flex:none;font:700 .78rem var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.jp-go::after{content:" →"}
+.jp[open] .jp-go::after{content:" ↑"}
+.jp[open] summary{border-bottom:1px solid var(--line)}
+.jp-full{padding:18px 20px 24px;display:grid;gap:14px}
+.jp-full p{margin:0;font-size:1.1rem;line-height:1.8;color:var(--ink);max-width:65ch}
+@media(max-width:600px){.jp-full p{font-size:1.05rem}.jp summary{padding:16px}.jp-full{padding:16px 16px 22px}}
 </style>
 
 <div id="intro" role="dialog" aria-label="Welcome to Muse &amp; Market" hidden>
@@ -431,10 +458,9 @@ body::before{background:#3A1442}
 </header>
 
 <main id="top">
+<div class="ann" aria-label="Welcome to Muse &amp; Market"><div class="ann-track"><span>Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span></div></div>
   <div class="wrap hero">
     <div class="hero-copy">
-      <p class="welcome" id="welcome" aria-label="Welcome to Muse &amp; Market">Welcome to <span class="brand-w sparkle">Muse &amp; Market</span></p>
-      <div class="welcome-line" aria-hidden="true"></div>
       <h1>Wear something <em>lovely.</em> Read something real.</h1>
       <p class="lede">Hand-picked perfumes and fashion, plus tips and stories.</p>
       <div class="hero-cta">
@@ -450,26 +476,13 @@ body::before{background:#3A1442}
     </div>
   </div>
 
-  <div class="wrap stats" aria-label="Quick facts">
-    <div class="stat"><b data-count="0" id="statItems">0</b><span>items in stock</span></div>
-    <div class="stat"><b data-count="5000" data-suffix=" FCFA">0</b><span>starting price</span></div>
-    <div class="stat"><b data-count="48" data-suffix="h">0</b><span>city delivery</span></div>
-    <div class="stat"><b data-count="3">0</b><span>ways to pay</span></div>
-  </div>
 
   <section id="shop">
     <div class="wrap">
       <div class="sec-head">
         <div><span class="eyebrow">The Shop</span><h2>Scents &amp; styles you'll love</h2></div>
-        <p class="lede">Tap the cart to add an item, then send your order in one tap.</p>
       </div>
-      <div class="cats" role="group" aria-label="Filter the shop">
-        <button class="chip" data-f="all" aria-pressed="true">Everything</button>
-        <button class="chip" data-f="her" aria-pressed="false">For her</button>
-        <button class="chip" data-f="him" aria-pressed="false">For him</button>
-        <button class="chip" data-f="dress" aria-pressed="false">Dresses &amp; sets</button>
-        <button class="chip" data-f="men" aria-pressed="false">Men's wear</button>
-      </div>
+      <button class="back-all" id="backAll" type="button" hidden>← Back to everything</button>
       <div class="grid" id="products"></div>
       <div class="soon-row" id="soon"><div class="soon-txt"><b>Shoes &amp; little extras</b><span>Coming soon. Leave your email and be the first to know.</span></div>
         <form class="soon-form" id="soonForm" novalidate><label for="soonEmail" class="sr">Your email</label><input id="soonEmail" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn" type="submit">Notify me</button><div class="ok" id="soonOk" hidden></div></form></div>
@@ -480,36 +493,9 @@ body::before{background:#3A1442}
     <div class="wrap">
       <div class="sec-head">
         <div><span class="eyebrow">The Journal</span><h2>Tips, ideas & stories</h2></div>
-        <p class="lede">Style tips, ideas and short stories. Free to read.</p>
       </div>
-      <div class="posts" id="posts">
-        <article class="post feature">
-          <span class="kind">Style guide</span>
-          <h3>How to make one perfume last from morning to night</h3>
-          <p>Pulse points, layering with lotion, and the one spot most people forget. A five-minute routine that saves you money.</p>
-          <a class="order" style="color:var(--bg)" href="#journal">Read the guide →</a>
-        </article>
-        <article class="post">
-          <span class="kind">Short story</span>
-          <h3>The Red Heels</h3>
-          <p>Part one of a serial about a market girl, a borrowed pair of shoes and a wedding she wasn't invited to.</p>
-        </article>
-        <article class="post">
-          <span class="kind">Ideas</span>
-          <h3>7 outfits from 3 dresses</h3>
-          <p>Belts, jackets and shoes that turn a small wardrobe into a full week of looks.</p>
-        </article>
-        <article class="post">
-          <span class="kind">Tips</span>
-          <h3>Spotting fake perfume before you pay</h3>
-          <p>Check the cap, the batch code and the box seal. What to ask any seller.</p>
-        </article>
-        <article class="post">
-          <span class="kind">Life</span>
-          <h3>Starting a side hustle with 20,000 FCFA</h3>
-          <p>What I bought first, what I'd skip, and how I found my first ten customers.</p>
-        </article>
-      </div>
+      <div class="jtabs" id="jtabs" role="tablist" aria-label="Journal topics"></div>
+      <div class="jlist" id="posts" role="tabpanel"></div>
     </div>
   </section>
 
@@ -689,11 +675,16 @@ function control(x){
  return q?`<div class="step"><button type="button" data-dec="${x.img}" aria-label="One less ${x.n}">−</button><span>${q}</span><button type="button" data-inc="${x.img}" aria-label="One more ${x.n}">+</button></div>`
   :`<button class="add" type="button" data-inc="${x.img}" aria-label="Add ${x.n} to cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h3l2.6 12.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.2L21.5 7H6.4"/></svg><span class="plus" aria-hidden="true">+</span></button>`;
 }
+const cat=x=>(x.g==='her'||x.g==='him')?'perfume':x.g;
+const mixed=(()=>{const P=products.filter(x=>cat(x)==='perfume'),D=products.filter(x=>x.g==='dress'),M=products.filter(x=>x.g==='men'),out=[];
+ while(P.length||D.length||M.length){out.push(...P.splice(0,2));if(D.length)out.push(D.shift());if(M.length)out.push(M.shift())}return out})();
 function render(){
- grid.innerHTML=products.filter(x=>filter==='all'||x.g===filter).map(x=>`
+ const list=filter==='all'?mixed:products.filter(x=>cat(x)===filter||x.g===filter);
+ const back=document.getElementById('backAll');if(back)back.hidden=filter==='all';
+ grid.innerHTML=list.map(x=>`
   <article class="product">
-   <div class="ph${wear(x)?' tall':''}"><span class="badge">${x.f}</span><img src="${x.img}" alt="${wear(x)?x.n:x.b+' '+x.n+' eau de parfum, '+x.s}" loading="lazy"${x.pos?` style="object-position:${x.pos}"`:''}></div>
-   <span class="brand">${x.g==='dress'?'Dresses & sets':x.g==='men'?"Men's wear":x.b+' · '+x.s}</span>
+   <button class="ph${wear(x)?' tall':''}" type="button" data-cat="${cat(x)}" aria-label="${filter==='all'?'See more like '+x.n:x.n}"><span class="badge">${x.f}</span><img src="${x.img}" alt="${wear(x)?x.n:x.b+' '+x.n+' eau de parfum, '+x.s}" loading="lazy"${x.pos?` style="object-position:${x.pos}"`:''}></button>
+   ${wear(x)?'':`<span class="brand">${x.b} · ${x.s}</span>`}
    <h3>${x.n}</h3>
    <p class="desc">${x.d}</p>
    <div class="meta"><span class="price">${money(x.p)}</span>${control(x)}</div>
@@ -749,6 +740,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!drawer.hidden)clos
 document.getElementById('fields').addEventListener('input',updateSend);
 document.getElementById('fields').addEventListener('change',updateSend);
 render();renderBasket();
+grid.addEventListener('click',e=>{const b=e.target.closest('button.ph');if(!b||filter!=='all')return;setFilter(b.dataset.cat);document.getElementById('shop').scrollIntoView({behavior:'smooth'})});
+document.getElementById('backAll').addEventListener('click',()=>{setFilter('all');document.getElementById('shop').scrollIntoView({behavior:'smooth'})});
 document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',c===b));
  filter=b.dataset.f;render();
@@ -789,28 +782,30 @@ function parseCSV(t){const rows=[];let r=[],f='',q=false;for(let i=0;i<t.length;
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const yes=v=>/^(y|yes|true|oui)$/i.test(String(v).trim());
 const getCSV=u=>fetch(u,{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>'');
+const POSTS=[{"cat": "Stories", "title": "The Red Heels", "summary": "A market girl, a borrowed pair of shoes and a wedding she wasn't invited to.", "full": "Every Saturday, Ngozi sold tomatoes from a wooden table at the edge of the market. Every Saturday, the shoe seller across the path, Mama Joy, hung one pair of red heels above her stall like a flag.\n\nNgozi had never touched them. She only looked, the way you look at the sky when you know you cannot fly.\n\nThat Saturday, the music started early. A wedding was passing through the market road: trumpets, gold wrappers, aunties dancing with their hands in the air. The bride was Adaeze, Ngozi's best friend from primary school. They had lost touch when Ngozi left school to help her mother. There had been no invitation.\n\n\"Go,\" said Mama Joy, suddenly standing beside her. She was holding the red heels. \"Bring them back by evening. Clean.\"\n\n\"I have no dress,\" Ngozi said.\n\n\"You have that blue wrapper and a straight back. That is enough.\"\n\nSo Ngozi walked. The heels were half a size too big, and she stuffed tissue in the toes. She did not go into the hall. She stood by the gate, where the photographer was setting up, and waited.\n\nWhen Adaeze stepped out of the car, she stopped. Then she screamed Ngozi's name so loudly that the trumpets went quiet.\n\n\"Where did you go?\" Adaeze cried, holding her face. \"I asked everyone. Nobody knew where you lived.\"\n\nThey danced until the sun went orange. Someone fed Ngozi jollof rice from a plate she did not have to pay for. Someone else asked where she bought her shoes.\n\nAt seven o'clock, she knocked on Mama Joy's door with the heels in her hands, wiped clean with the hem of her wrapper.\n\n\"Well?\" asked Mama Joy.\n\n\"She was looking for me,\" Ngozi said. \"All this time, she was looking for me.\"\n\nMama Joy pushed the shoes back into her hands. \"Then these were always yours. Pay me small small.\"\n\nSome shoes take you to a party. The best ones take you back to the people who never stopped waiting for you."}, {"cat": "Stories", "title": "The Last Bottle", "summary": "One perfume left on the shelf, two customers who both want it, and a seller who has to choose.", "full": "It was the last bottle of Aroma on the shelf, and two women reached for it at the same time.\n\nThe first was tall, in a sharp office suit, already holding out her money. \"I need it today,\" she said. \"I have an interview at three.\"\n\nThe second was older, in a faded church dress. She did not hold out money. She only held the bottle very gently, like it was a small bird. \"My daughter wore this,\" she said quietly. \"She travelled last year. I just wanted to smell it again.\"\n\nThe seller looked from one to the other. Business is business, her mother always said. Sell to the one with the money.\n\nBut before she could speak, the woman in the suit lowered her hand.\n\n\"Take it,\" she told the older woman. \"Please.\"\n\n\"No, no, your interview...\"\n\n\"I'll be fine.\" Then she laughed. \"Actually, can I ask a favour? Spray a little on me before you go. For luck.\"\n\nSo the mother opened the bottle in the middle of the shop and sprayed the stranger's wrist, then her own. For a moment the whole room smelled of soft flowers and somebody's daughter.\n\nThe seller wrote both their numbers in her notebook. When the new stock arrived the next week, she called the woman in the suit first.\n\n\"Did you get the job?\" she asked.\n\n\"I did,\" the woman said. \"And I want two bottles. One is for a lady I met in your shop.\"\n\nA scent is never only a scent. Sometimes it is a memory. Sometimes it is luck. Sometimes it is the beginning of a friendship that starts with one small spray."}, {"cat": "Tips", "title": "Spotting fake perfume before you pay", "summary": "Check the cap, the batch code and the box seal. Here's what to ask any seller.", "full": "Fake perfume smells fine for ten minutes, then disappears, or worse, irritates your skin. Before you pay anyone, check these five things.\n\n1. The box. A real box has clean, sharp printing with no spelling mistakes. The cellophane wrap is tight and neatly folded, not loose or burnt at the edges.\n\n2. The batch code. Look for a small printed or stamped code on the bottom of the box. The same code should appear on the bottle itself. If the box has a code and the bottle doesn't, be careful.\n\n3. The bottle and cap. Real bottles are smooth and even, with no rough glass lines. The cap should fit firmly and feel heavy, not light and plasticky.\n\n4. The liquid. Hold it to the light. The colour should be clear and even, with nothing floating in it.\n\n5. The price. A big designer name at a very small price is usually a warning sign.\n\nQuestions to ask any seller: Can I see the box before I pay? Can I test it on my skin first? What happens if it's damaged or leaking?\n\nA good seller will happily answer all three."}, {"cat": "Tips", "title": "Keep your clothes looking new for longer", "summary": "Five small habits that save your favourite pieces from fading, shrinking and stretching.", "full": "New clothes feel amazing. Here's how to keep that feeling for months, not weeks.\n\nWash inside out. This protects colours and prints, especially on knits and sparkly details.\n\nUse cold water. Hot water fades colours and shrinks knits. Cold water is gentler and cleans just as well for everyday wear.\n\nSkip the hard wringing. Press water out gently instead of twisting. Twisting stretches fabric out of shape.\n\nDry in the shade. Strong sun fades colours fast. Hang dark and bright clothes in the shade, and lay knits flat so they don't stretch.\n\nFold knits, hang the rest. Knit dresses and sets can stretch on a hanger. Fold them. Shirts and structured pieces can hang.\n\nBonus: spray perfume on your skin, not on your clothes. Some perfumes can leave marks on light fabrics."}, {"cat": "Ideas", "title": "7 outfits from 3 dresses", "summary": "Belts, jackets and shoes that turn a small wardrobe into a full week of looks.", "full": "You don't need a full wardrobe to look different every day. Take three dresses, one belt, one jacket and two pairs of shoes, and you have a week.\n\nMonday: A midi dress with flat sandals. Simple and smart for work.\n\nTuesday: The same midi with a belt and heels. Suddenly it's an evening look.\n\nWednesday: A maxi dress with a denim or light jacket on top. Relaxed and cool.\n\nThursday: The maxi, belted, with your hair up. Elegant enough for dinner or church.\n\nFriday: A mini dress with flat sandals for a casual day out.\n\nSaturday: The mini with heels and bold earrings for a party.\n\nSunday: Your favourite of the three, dressed down with the jacket for a slow day.\n\nThe secret is to choose dresses in colours that work with the same shoes and accessories. Black, ivory and one bright colour is a perfect start."}, {"cat": "Ideas", "title": "Gift ideas that always land", "summary": "Not sure what to buy? These picks feel personal without costing a fortune.", "full": "The best gifts feel like you were really thinking about the person. Here are ideas that rarely miss.\n\nA signature scent. Perfume feels personal and luxurious. Pick something fresh for someone who loves simple things, or something warm and bold for someone who loves attention.\n\nA matching set. Two-piece sets are easy to style and feel like a full outfit in one gift.\n\nA \"just because\" outfit. A pretty dress or a smart polo for someone who's had a hard month says \"I see you\".\n\nAdd a handwritten note. Even two lines turn a nice gift into one they'll keep.\n\nWrap it well. A simple bag, some tissue paper and a ribbon make any gift feel special."}, {"cat": "Life", "title": "Starting a side hustle with 20,000 FCFA", "summary": "A small budget can still start something real. Here's a simple way to begin.", "full": "You don't need a shop or a big loan to start selling. You need a small budget, good photos and consistency.\n\nStart with what you know. Choose one product you understand and would buy yourself. Knowing your product makes selling feel natural.\n\nBuy small, test fast. Spend on just a few items first. See what sells before you buy more.\n\nTake clear photos. Use daylight by a window, a plain background and a clean phone camera. Good photos sell more than long descriptions.\n\nTell your circle. Friends, family, church and classmates are your first customers. Ask happy customers to share.\n\nKeep records. Write down what you buy, what you sell and what you earn. Even a notebook works.\n\nReinvest. Put your profit back into stock for the first few months. Growth comes from patience.\n\nSmall steps, done every week, become a real business."}, {"cat": "Life", "title": "Small joys for a hard week", "summary": "When everything feels heavy, these little things help you breathe again.", "full": "Some weeks are just heavy. When they are, small joys matter more than big plans.\n\nDress up for no reason. Wear the outfit you're \"saving\". Feeling good in what you wear changes how you carry yourself.\n\nSpray your favourite scent before bed. A familiar smell can calm your mind and make your room feel like yours.\n\nCall one person who makes you laugh. Five minutes can change your whole evening.\n\nTake a slow walk. No destination, no phone. Just air and movement.\n\nWrite down three good things. Even tiny ones count: good food, a kind message, a quiet moment.\n\nBe gentle with yourself. Hard weeks end. You don't have to be perfect to keep going."}, {"cat": "Style guide", "title": "How to make one perfume last from morning to night", "summary": "Pulse points, layering with lotion and the one spot most people forget.", "full": "A good perfume should follow you all day. These small habits make one bottle go much further.\n\nStart with moisturised skin. Perfume holds better on skin that isn't dry. Apply an unscented lotion first, then spray.\n\nSpray on pulse points. Wrists, the sides of your neck and inside your elbows are warm, so they help the scent spread.\n\nDon't rub your wrists together. Rubbing breaks down the top notes faster. Spray and let it dry on its own.\n\nRemember the spot most people forget: behind your knees. As you walk, the scent rises gently all day.\n\nSpray your hair lightly. Hair holds scent for hours. Spray into the air and walk through it rather than spraying directly.\n\nKeep the bottle out of the sun. Heat and light break perfume down. A drawer or cupboard keeps it fresh for longer.\n\nTwo sprays in the morning and one more in the evening is all you need."}, {"cat": "Style guide", "title": "Choosing a dress for your body shape", "summary": "Highlight what you love, keep everything else simple, and let the dress do the work.", "full": "There are no rules you must follow, only tricks that make dressing easier.\n\nStart with your favourite feature. Love your waist? Choose fitted or belted dresses. Proud of your shoulders? Try off-shoulder styles. Great legs? Go for a mini or a midi with a slit.\n\nKeep balance in mind. If the top is loose, keep the bottom fitted, and the other way round.\n\nWrap and A-line dresses flatter almost everyone. They shape the waist and flow over the hips.\n\nLong sleeves and maxi lengths look elegant and work for church, dinners and events.\n\nComfort counts. If you can't sit, walk or breathe in it, it won't look good, however beautiful it is.\n\nThe best dress is the one that makes you stand a little taller when you put it on."}];
+const JCATS=['Stories','Tips','Ideas','Life','Style guide'];
+let jcat='Stories';
+const jmap=t=>{t=String(t||'').toLowerCase();return /stor/.test(t)?'Stories':/tip/.test(t)?'Tips':/idea/.test(t)?'Ideas':/life/.test(t)?'Life':/style|guide/.test(t)?'Style guide':'Stories'};
+function renderJournal(){
+ document.getElementById('jtabs').innerHTML=JCATS.map(c=>`<button class="jtab" type="button" role="tab" aria-selected="${c===jcat}" data-jc="${c}">${c}</button>`).join('');
+ document.getElementById('posts').innerHTML=POSTS.filter(p=>p.cat===jcat).map(p=>{
+  const paras=String(p.full||'').split(/\n+/).filter(Boolean).map(t=>`<p>${esc(t)}</p>`).join('');
+  return `<details class="jp"><summary><span class="jp-h"><b>${esc(p.title)}</b>${p.summary?`<span>${esc(p.summary)}</span>`:''}</span><span class="jp-go" aria-hidden="true">Read</span></summary><div class="jp-full">${paras}</div></details>`}).join('')||'<p class="empty">New posts are coming soon.</p>';
+}
+document.getElementById('jtabs').addEventListener('click',e=>{const b=e.target.closest('[data-jc]');if(!b)return;jcat=b.dataset.jc;renderJournal()});
+renderJournal();
 Promise.all([getCSV(SHEET_MAIN),getCSV(SHEET_FORM)]).then(([mainT,formT])=>{
- const posts=[];
- // stories sent through the Google Form (newest first). Columns: Timestamp, Title, Type, Summary, Full story, Members only
+ const extra=[];
  if(formT){const rows=parseCSV(formT);rows.shift();rows.reverse().forEach(r=>{const c=i=>(r[i]||'').trim();
-  if(c(1))posts.push({title:c(1),type:c(2),summary:c(3),full:c(4),ic:yes(c(5))})})}
- // stories typed straight into the sheet
+  if(c(1)&&c(4))extra.push({cat:jmap(c(2)),title:c(1),summary:c(3),full:c(4)})})}
  if(mainT){const rows=parseCSV(mainT);const head=rows.shift().map(h=>h.trim().toLowerCase());
   const col=n=>head.indexOf(n);const g=(r,n)=>col(n)<0?'':(r[col(n)]||'').trim();
-  rows.forEach(r=>{if(!g(r,'title'))return;if(col('show')>=0&&g(r,'show')&&!yes(g(r,'show')))return;
-   posts.push({title:g(r,'title'),type:g(r,'type'),summary:g(r,'summary'),full:g(r,'full story'),ic:yes(g(r,'members only')||g(r,'inner circle'))})})}
- if(!posts.length)return;
- document.getElementById('posts').innerHTML=posts.map((x,i)=>{
-  const paras=x.full.split(/\n+/).filter(Boolean).map(t=>`<p>${esc(t)}</p>`).join('');
-  return `<article class="post${i===0?' feature':''}">
-   <span class="kind">${esc(x.type||'Journal')}</span>
-   <h3>${esc(x.title)}</h3>
-   ${x.summary?`<p>${esc(x.summary)}</p>`:''}
-   ${x.full?`<div class="full" hidden>${paras}</div><button class="more" type="button">Read more →</button>`:''}
-  </article>`}).join('');
+  rows.forEach(r=>{if(!g(r,'title')||!g(r,'full story'))return;if(col('show')>=0&&g(r,'show')&&!yes(g(r,'show')))return;
+   extra.push({cat:jmap(g(r,'type')),title:g(r,'title'),summary:g(r,'summary'),full:g(r,'full story')})})}
+ const seen=new Set(POSTS.map(p=>p.title.toLowerCase()));
+ const add=extra.filter(p=>!seen.has(p.title.toLowerCase()));
+ if(add.length){POSTS.unshift(...add);renderJournal()}
 });
-document.getElementById('posts').addEventListener('click',e=>{const b=e.target.closest('.more');if(!b)return;
- const f=b.previousElementSibling;f.hidden=!f.hidden;b.textContent=f.hidden?'Read more →':'Show less ↑'});
 
 const INBOX='https://formsubmit.co/ajax/tahakwi05@gmail.com';
 async function sendMsg(data){
@@ -884,7 +879,7 @@ const calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
  v.addEventListener('click',()=>{const x=items[k];setFilter(x?x.g:'all');document.getElementById('shop').scrollIntoView({behavior:calm?'auto':'smooth'})});
 })();
 // 5. counters
-document.getElementById('statItems').dataset.count=products.length;
+{const si=document.getElementById('statItems');if(si)si.dataset.count=products.length}
 function countUp(el){const end=+el.dataset.count,suf=el.dataset.suffix||'';if(calm){el.textContent=end.toLocaleString('en-US')+suf;return}
  const t0=performance.now(),d=1400;(function step(t){const p=Math.min(1,(t-t0)/d),e=1-Math.pow(1-p,3);el.textContent=Math.round(end*e).toLocaleString('en-US')+suf;if(p<1)requestAnimationFrame(step)})(t0)}
 // 3. fade-in on scroll (+ start counters when visible)

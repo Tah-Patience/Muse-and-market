@@ -451,6 +451,14 @@ button.ph{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inheri
 @media (prefers-reduced-motion:reduce){.swirl-svg path{animation:none;stroke-dashoffset:0}.hs{animation:none}}
 #menuBtn .tl{display:block}
 @media(max-width:600px){.ph .ribbon{top:auto;right:auto;bottom:8px;left:8px}}
+.momo{display:grid;gap:8px;padding:14px;border-radius:14px;background:var(--gold-soft);border:1px solid #E2B15C}
+.momo-t{font-family:var(--display);font-size:1.15rem;font-weight:600;color:var(--ink)}
+.momo-row{display:flex;align-items:center;gap:10px;font-size:.95rem}
+.momo-row span{min-width:64px;color:var(--muted);font-size:.85rem}
+.momo-row strong{font-variant-numeric:tabular-nums;color:var(--ink)}
+.copy{margin-left:auto;min-height:36px;padding:6px 14px;border-radius:999px;border:1px solid var(--plum);background:var(--surface);color:var(--plum);font:700 .8rem var(--body);cursor:pointer}
+.momo-steps{margin:2px 0 4px;padding-left:20px;font-size:.88rem;color:var(--ink);display:grid;gap:3px}
+.momo-safe{margin:0;font-size:.78rem;color:var(--muted)}
 </style>
 
 <div id="intro" role="dialog" aria-label="Welcome to Muse &amp; Market" hidden>
@@ -593,8 +601,8 @@ button.ph{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inheri
           <p>By placing an order you agree to these terms. We may update them from time to time, and the version shown here on the day of your order applies.</p>
         </details>
         <details id="payment"><summary>Payment</summary>
-          <p>We accept mobile money (MTN Mobile Money and Orange Money) and, where available, cash on delivery.</p>
-          <p>For mobile money, send payment only to +237 653 426 739, the number shown on this site, and only after we confirm your order. We will never ask for your PIN or secret code.</p>
+          <p>We accept MTN Mobile Money and, where available, cash on delivery.</p>
+          <p>For MTN Mobile Money, send payment only to +237 653 426 739 in the name of Belinda Funying, as shown in your cart. Pay only after we confirm your order on WhatsApp. We will never ask for your PIN or secret code.</p>
           <p>Cash-on-delivery orders that are refused at the door without a good reason may require payment upfront next time.</p>
         </details>
         <details id="delivery"><summary>Delivery</summary>
@@ -638,8 +646,16 @@ button.ph{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inheri
       <input id="cArea" placeholder="Neighbourhood and a landmark nearby">
       <span style="font-size:.82rem;font-weight:600">Payment</span>
       <div class="pay">
-        <label><input type="radio" name="pay" value="Mobile money (MTN / Orange)" checked> Mobile money</label>
+        <label><input type="radio" name="pay" value="MTN Mobile Money" checked> MTN MoMo</label>
         <label><input type="radio" name="pay" value="Cash on delivery"> Cash on delivery</label>
+      </div>
+      <div class="momo" id="momo">
+        <b class="momo-t">Pay after we confirm</b>
+        <div class="momo-row"><span>Number</span><strong>653 426 739</strong><button type="button" class="copy" id="copyNum">Copy</button></div>
+        <div class="momo-row"><span>Name</span><strong>Belinda Funying</strong></div>
+        <div class="momo-row"><span>Amount</span><strong id="momoAmt">0 FCFA</strong></div>
+        <ol class="momo-steps"><li>Send your order. No payment yet.</li><li>We confirm on WhatsApp that your items are in stock.</li><li>Then send the amount by MTN MoMo to the number above. Check that the name shows <b>Belinda Funying</b> before you confirm.</li></ol>
+        <p class="momo-safe">We will never ask for your PIN or secret code.</p>
       </div>
       <label for="cNote">Note (optional)</label>
       <input id="cNote" placeholder="Gift wrap, best time to deliver…">
@@ -737,11 +753,13 @@ function updateSend(){
  const note=document.getElementById('cNote').value.trim();
  const pay=(document.querySelector('input[name="pay"]:checked')||{}).value||'';
  const btn=document.getElementById('sendBtn'), hint=document.getElementById('hint');
+ const momo=pay.startsWith('MTN');
+ document.getElementById('momo').hidden=!momo;document.getElementById('momoAmt').textContent=money(t);
  const ok=c>0&&name;
  btn.setAttribute('aria-disabled',ok?'false':'true');
- hint.textContent=!c?'Add an item to start your order.':!name?'Add your name to send your order.':'WhatsApp opens with your order ready. Just press send.';
+ hint.textContent=!c?'Add an item to start your order.':!name?'Add your name to send your order.':momo?'Send your order now. You pay only after we confirm.':'WhatsApp opens with your order ready. Just press send.';
  const items=Object.keys(basket).map(k=>`• ${basket[k]} × ${byImg[k].b} ${byImg[k].n} (${byImg[k].s}) = ${money(basket[k]*byImg[k].p)}`).join('\n');
- const msg=`Hello Muse & Market! I'd like to order:\n${items}\n\nTotal: ${money(t)}\nName: ${name}\nDelivery area: ${area||'to confirm'}\nPayment: ${pay}${note?'\nNote: '+note:''}`;
+ const msg=`Hello Muse & Market! I'd like to order:\n${items}\n\nTotal: ${money(t)}\nName: ${name}\nDelivery area: ${area||'to confirm'}\nPayment: ${pay}${momo?' (I will pay after you confirm)':''}${note?'\nNote: '+note:''}`;
  btn.href=`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
 }
 function change(k,d){basket[k]=(basket[k]||0)+d;if(basket[k]<=0)delete basket[k];save();render();renderBasket()}
@@ -765,6 +783,8 @@ document.getElementById('closeB').addEventListener('click',closeB);
 scrim.addEventListener('click',closeB);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!drawer.hidden)closeB()});
 document.getElementById('fields').addEventListener('input',updateSend);
+document.getElementById('copyNum').addEventListener('click',e=>{const b=e.currentTarget,n='653426739';const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)};
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(n).then(done,done);else{const t=document.createElement('textarea');t.value=n;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(err){}t.remove();done()}});
 document.getElementById('fields').addEventListener('change',updateSend);
 render();renderBasket();
 grid.addEventListener('click',e=>{const b=e.target.closest('button.ph');if(!b||filter!=='all')return;setFilter(b.dataset.cat);document.getElementById('shop').scrollIntoView({behavior:'smooth'})});

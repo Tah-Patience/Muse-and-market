@@ -424,6 +424,33 @@ button.ph{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inheri
 .jp-full{padding:18px 20px 24px;display:grid;gap:14px}
 .jp-full p{margin:0;font-size:1.1rem;line-height:1.8;color:var(--ink);max-width:65ch}
 @media(max-width:600px){.jp-full p{font-size:1.05rem}.jp summary{padding:16px}.jp-full{padding:16px 16px 22px}}
+
+/* ---- Nov 2026 c: icon header, cute hero, shop-first ---- */
+.tn{flex-direction:column;justify-content:center;gap:3px;padding:6px 10px;min-width:56px;letter-spacing:.12em;font:600 .62rem var(--body);text-transform:uppercase}
+.tn .ic{width:24px;height:24px;display:block;color:#F7DFA4;transition:transform .25s}
+.tn:hover .ic,.tn.on .ic,.tn[aria-expanded="true"] .ic{transform:translateY(-2px)}
+.tn::after{bottom:2px;left:14px;right:14px}
+.tn .tl{line-height:1}
+#cartBtn .ccount{position:absolute;top:2px;right:6px;min-width:18px;height:18px;font-size:.62rem;margin:0;letter-spacing:0}
+@media(max-width:600px){.tn{padding:6px 6px;min-width:52px;font-size:.6rem;letter-spacing:.1em}.tn::after{left:12px;right:12px}}
+.hero-h{position:relative}
+.hero-h .swirl{position:relative;display:inline-block;color:var(--plum)}
+.swirl-svg{position:absolute;left:-2%;bottom:-.18em;width:104%;height:.38em;overflow:visible}
+.swirl-svg path{fill:none;stroke:var(--gold);stroke-width:3;stroke-linecap:round;stroke-dasharray:160;stroke-dashoffset:160;animation:draw 1.4s .4s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hero-h .real{color:var(--plum);font-style:italic}
+.hs{position:absolute;color:var(--gold);font-size:.32em;animation:twinkle 2.2s ease-in-out infinite;pointer-events:none}
+.hs1{top:-.35em;left:52%}.hs2{top:1.1em;right:-.2em;animation-delay:.7s;font-size:.24em}.hs3{bottom:-.45em;left:-.3em;animation-delay:1.3s;font-size:.26em}
+.shop-now{background:linear-gradient(135deg,#E2B15C,#F7DFA4 55%,#C9923A);border-color:#C9923A;color:#3A1442;font-weight:800;font-size:1rem;padding:13px 26px;box-shadow:0 8px 22px rgb(183 121 31 / .35)}
+.shop-now .ic{width:20px;height:20px}
+.shop-now:hover{transform:translateY(-2px)}
+.ph .ribbon{position:absolute;top:12px;right:12px;z-index:2;background:#3A1442;color:#F7DFA4;font:700 .66rem var(--body);letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid #E2B15C}
+#shop{padding-top:28px}
+.hero{padding-block:22px 12px}
+@media(max-width:600px){.vitrine{max-width:280px}.ph .ribbon{font-size:.56rem;padding:3px 7px;top:8px;right:8px}.hero{gap:20px}}
+@media (prefers-reduced-motion:reduce){.swirl-svg path{animation:none;stroke-dashoffset:0}.hs{animation:none}}
+#menuBtn .tl{display:block}
+@media(max-width:600px){.ph .ribbon{top:auto;right:auto;bottom:8px;left:8px}}
 </style>
 
 <div id="intro" role="dialog" aria-label="Welcome to Muse &amp; Market" hidden>
@@ -442,30 +469,29 @@ button.ph{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inheri
   <div class="wrap nav">
     <a class="logo logo-mark" href="#top" aria-label="Muse &amp; Market, home"><svg viewBox="0 0 240 240" aria-hidden="true"><circle cx="120" cy="120" r="114" fill="#3A1442"/><circle cx="120" cy="120" r="114" fill="none" stroke="#E2B15C" stroke-width="7"/><circle cx="120" cy="120" r="98" fill="none" stroke="#E2B15C" stroke-width="2" stroke-dasharray="3 7"/><path d="M120 36 l4 9 9 4 -9 4 -4 9 -4 -9 -9 -4 9 -4z" fill="#E2B15C"/><text x="120" y="152" text-anchor="middle" font-family="Bodoni Moda, Didot, serif" font-size="80" fill="#E2B15C" letter-spacing="-2">M<tspan font-style="italic" font-size="56" dy="-6">&amp;</tspan><tspan dy="6">M</tspan></text><text x="120" y="190" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="700" font-size="13" letter-spacing="5" fill="#E2B15C">MUSE · MARKET</text></svg></a>
     <nav class="topnav" aria-label="Site menu">
-      <a class="tn" href="#shop" data-go="all" data-sec="shop">Shop</a>
+      <a class="tn" href="#shop" data-go="all" data-sec="shop"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 12.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg><span class="tl">Shop</span></a>
       <div class="ex">
-        <button class="tn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu">Explore</button>
+        <button class="tn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="tl">Explore</span></button>
         <div class="ex-list" id="menu" hidden>
-          <a href="#journal" data-sec="journal">Journal &amp; stories</a>
+          <a href="#journal" data-sec="journal">Lifestyle</a>
           <a href="#ask" data-sec="ask">Ask me</a>
           <a href="#follow" data-sec="follow">Contact &amp; socials</a>
           <a href="#policies" data-sec="policies">Policies</a>
         </div>
       </div>
-      <button class="tn" id="cartBtn" type="button" aria-label="Open cart">Cart<span class="ccount" id="cartCount" hidden>0</span></button>
+      <button class="tn" id="cartBtn" type="button" aria-label="Open cart"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h3l2.6 12.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.2L21.5 7H6.4"/></svg><span class="tl">Cart</span><span class="ccount" id="cartCount" hidden>0</span></button>
     </nav>
   </div>
 </header>
 
 <main id="top">
-<div class="ann" aria-label="Welcome to Muse &amp; Market"><div class="ann-track"><span>Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span><span aria-hidden="true">Welcome to Muse &amp; Market</span></div></div>
   <div class="wrap hero">
     <div class="hero-copy">
-      <h1>Wear something <em>lovely.</em> Read something real.</h1>
+      <h1 class="hero-h">Wear something <em class="swirl">lovely.<svg class="swirl-svg" viewBox="0 0 120 22" preserveAspectRatio="none" aria-hidden="true"><path d="M3 14 C 22 4, 38 20, 58 11 S 96 3, 117 13"/></svg></em><br>Read something <em class="real">real.</em><span class="hs hs1" aria-hidden="true">✦</span><span class="hs hs2" aria-hidden="true">✦</span><span class="hs hs3" aria-hidden="true">✦</span></h1>
       <p class="lede">Hand-picked perfumes and fashion, plus tips and stories.</p>
       <div class="hero-cta">
-        <a class="btn" href="#shop">Browse the shop</a>
-        <a class="btn ghost" href="#journal">Read the journal</a>
+        <a class="btn shop-now" href="#shop" data-go="all"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 12.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>Shop now</a>
+        <a class="btn ghost" href="#journal">Lifestyle</a>
       </div>
     </div>
     <div class="vitrine">
@@ -492,7 +518,7 @@ button.ph{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inheri
   <section id="journal" class="alt">
     <div class="wrap">
       <div class="sec-head">
-        <div><span class="eyebrow">The Journal</span><h2>Tips, ideas & stories</h2></div>
+        <div><span class="eyebrow">Lifestyle</span><h2>Tips, ideas & stories</h2></div>
       </div>
       <div class="jtabs" id="jtabs" role="tablist" aria-label="Journal topics"></div>
       <div class="jlist" id="posts" role="tabpanel"></div>
@@ -556,7 +582,7 @@ button.ph{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inheri
   <section id="policies" class="alt">
     <div class="wrap">
       <div class="sec-head">
-        <div><span class="eyebrow">The fine print</span><h2>Terms &amp; policies</h2></div>
+        <div><span class="eyebrow">Terms &amp; Policies</span></div>
         <p class="lede">Last updated 28 October 2026.</p>
       </div>
       <div class="qa pol">
@@ -587,7 +613,7 @@ button.ph{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inheri
           <p>Your cart is saved only on your own device so it is still there when you come back. Clearing your browser removes it.</p>
           <p>You can ask us at any time to see or delete the information we hold about you, or to stop receiving messages. Just send “Delete my data” or “Stop” on WhatsApp.</p>
         </details>
-        <details id="content"><summary>Journal &amp; Q&amp;A</summary>
+        <details id="content"><summary>Lifestyle &amp; Q&amp;A</summary>
           <p>All articles, stories and tips on this site belong to Muse &amp; Market. You are welcome to share links, but please do not copy or resell the content.</p>
           <p>Questions you send may be answered publicly in the journal without your name, unless you ask us to use it.</p>
         </details>
@@ -678,12 +704,13 @@ function control(x){
 const cat=x=>(x.g==='her'||x.g==='him')?'perfume':x.g;
 const mixed=(()=>{const P=products.filter(x=>cat(x)==='perfume'),D=products.filter(x=>x.g==='dress'),M=products.filter(x=>x.g==='men'),out=[];
  while(P.length||D.length||M.length){out.push(...P.splice(0,2));if(D.length)out.push(D.shift());if(M.length)out.push(M.shift())}return out})();
+const NEWIN=['Midnight Sparkle Maxi','Glam Letter Set','Cocoa Check Fur Jacket','Retro Track Suit \u2013 Pink','Tropical Bloom Set','Together 19 Polo'];
 function render(){
  const list=filter==='all'?mixed:products.filter(x=>cat(x)===filter||x.g===filter);
  const back=document.getElementById('backAll');if(back)back.hidden=filter==='all';
  grid.innerHTML=list.map(x=>`
   <article class="product">
-   <button class="ph${wear(x)?' tall':''}" type="button" data-cat="${cat(x)}" aria-label="${filter==='all'?'See more like '+x.n:x.n}"><span class="badge">${x.f}</span><img src="${x.img}" alt="${wear(x)?x.n:x.b+' '+x.n+' eau de parfum, '+x.s}" loading="lazy"${x.pos?` style="object-position:${x.pos}"`:''}></button>
+   <button class="ph${wear(x)?' tall':''}" type="button" data-cat="${cat(x)}" aria-label="${filter==='all'?'See more like '+x.n:x.n}"><span class="badge">${x.f}</span>${NEWIN.includes(x.n)?'<span class="ribbon">New in</span>':''}<img src="${x.img}" alt="${wear(x)?x.n:x.b+' '+x.n+' eau de parfum, '+x.s}" loading="lazy"${x.pos?` style="object-position:${x.pos}"`:''}></button>
    ${wear(x)?'':`<span class="brand">${x.b} · ${x.s}</span>`}
    <h3>${x.n}</h3>
    <p class="desc">${x.d}</p>
@@ -764,6 +791,7 @@ const tbKey=l=>(l.dataset.go||'')+'|'+l.dataset.sec;
 function setFilter(f){filter=f;document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.f===f));render()}
 function mark(a){tbLinks.forEach(l=>l.classList.toggle('on',tbKey(l)===tbKey(a)));}
 tbLinks.forEach(a=>a.addEventListener('click',()=>{if(a.dataset.go)setFilter(a.dataset.go);mark(a)}));
+document.querySelector('.shop-now').addEventListener('click',()=>setFilter('all'));
 document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{const l=tbLinks.find(x=>x.dataset.go===b.dataset.f);if(l)mark(l)}));
 if('IntersectionObserver' in window){
  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const id=e.target.id;

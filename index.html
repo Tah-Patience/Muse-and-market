@@ -332,7 +332,7 @@ section,#soon{scroll-margin-top:80px}
 /* ---- Nov 2026: badge logo, cart icons, simple menu, phone sizes ---- */
 .logo-mark{display:block;width:50px;height:50px;border-radius:50%;box-shadow:0 6px 18px rgb(58 20 66 / .3);transition:transform .4s;flex:none}
 .logo-mark svg{width:100%;height:100%;display:block}
-.logo-mark:hover{transform:rotate(-8deg) scale(1.05)}
+
 .nav-r{display:flex;align-items:center;gap:10px}
 .cart-btn{position:relative;width:44px;height:44px;border-radius:50%;border:1px solid #B7791F;background:linear-gradient(90deg,#3A1442,#5B2364);color:#F7DFA4;display:grid;place-items:center;cursor:pointer;padding:0}
 .cart-btn svg{width:22px;height:22px}
@@ -493,11 +493,51 @@ button.ph{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inheri
 @media(max-width:600px){.how{gap:6px}.how li{font-size:.78rem;padding:6px 12px 6px 6px}.how li::before{width:22px;height:22px}}
 .size{font-size:.72rem;color:var(--muted);font-weight:600}
 .need{font-size:.8rem;color:var(--plum);font-weight:600;margin:-4px 0 0}
+/* ---- Nov 23 2026: steady logo + name, item sheet, sold out ---- */
+.brandlink{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none;min-width:0}
+.brandlink .logo-mark{width:44px;height:44px;flex:none;transition:none}
+.wordmark{font-family:var(--display);font-size:1.35rem;font-weight:600;color:#F7DFA4;white-space:nowrap;letter-spacing:.01em;line-height:1}
+.wordmark i{color:#E2B15C}
+.nav{flex-wrap:nowrap}
+@media(max-width:420px){.brandlink{gap:7px}.brandlink .logo-mark{width:36px;height:36px}.wordmark{font-size:1.08rem}.tn{min-width:46px;padding:6px 4px}}
+.tapline{margin:-8px 0 18px;font-size:.95rem;font-weight:600;color:var(--plum)}
+.product{gap:6px}
+.product h3{margin:2px 0 0}
+.pname{all:unset;cursor:pointer;font-family:var(--display);line-height:1.2}
+.pname:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.product .price{font-size:.95rem}
+.product.out .ph img{filter:grayscale(.7) opacity(.75)}
+.ph .soldr{background:#7A1F2B;border-color:#7A1F2B;color:#fff}
+.incart{position:absolute;bottom:10px;right:10px;z-index:2;background:var(--plum);color:#fff;font:700 .68rem var(--body);padding:4px 10px;border-radius:999px}
+@media(max-width:600px){.ph .soldr{top:auto;bottom:8px;left:8px}}
+.isheet{position:fixed;z-index:41;left:50%;top:50%;transform:translate(-50%,-50%);width:min(860px,94vw);max-height:92dvh;overflow:auto;background:var(--surface);color:var(--ink);border-radius:20px;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 30px 80px rgb(0 0 0 / .35)}
+#iscrim{z-index:40}
+.iph{background:var(--sunk)}
+.iph img{width:100%;height:100%;max-height:92dvh;object-fit:cover;display:block}
+.ibody{padding:28px;display:grid;gap:12px;align-content:start}
+.ibody h2{font-size:clamp(1.5rem,4vw,2rem)}
+.idesc{margin:0;color:var(--muted);font-size:1rem}
+.imeta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.imeta .price{font-size:1.25rem}
+.ichip{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--plum);background:var(--gold-soft);padding:4px 10px;border-radius:999px}
+.isize{margin:0;font-size:.85rem;color:var(--muted)}
+.iadd{justify-content:center;width:100%;padding:14px 20px;font-size:1rem;background:var(--plum);border-color:var(--plum);color:#fff}
+.iadd.ghost{background:transparent;color:var(--plum)}
+.iqty{display:flex;gap:10px;align-items:center}
+.iqty .iadd{flex:1}
+.iok{margin:0;font-size:.85rem;color:#1F7A3A;font-weight:700}
+.isold{margin:0;font-weight:700;color:#7A1F2B}
+.ilink{justify-self:start;background:none;border:0;padding:6px 0;color:var(--plum);font:700 .9rem var(--body);cursor:pointer}
+.ix{position:absolute;top:12px;right:12px;z-index:2;background:rgb(255 255 255 / .9);color:#2A1530}
+@media(max-width:700px){.isheet{left:0;right:0;bottom:0;top:auto;transform:none;width:100%;border-radius:20px 20px 0 0;grid-template-columns:1fr;padding-bottom:env(safe-area-inset-bottom,0px)}
+ .iph img{max-height:50dvh}.ibody{padding:18px 18px 22px}}
+.sim{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:.88rem;padding:10px 12px;border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.sim input{width:auto;margin-top:3px}
 </style>
 
 <header>
   <div class="wrap nav">
-    <a class="logo logo-mark" href="#top" aria-label="Akwi Daily, home"><svg viewBox="0 0 240 240" aria-hidden="true"><circle cx="120" cy="120" r="114" fill="#3A1442"/><circle cx="120" cy="120" r="114" fill="none" stroke="#E2B15C" stroke-width="7"/><circle cx="120" cy="120" r="98" fill="none" stroke="#E2B15C" stroke-width="2" stroke-dasharray="3 7"/><path d="M120 36 l4 9 9 4 -9 4 -4 9 -4 -9 -9 -4 9 -4z" fill="#E2B15C"/><text x="120" y="152" text-anchor="middle" font-family="Bodoni Moda, Didot, serif" font-size="80" fill="#E2B15C" letter-spacing="2">AD</text><text x="120" y="190" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="700" font-size="13" letter-spacing="5" fill="#E2B15C">AKWI · DAILY</text></svg></a>
+    <a class="brandlink" href="#top" aria-label="Akwi Daily, home"><span class="logo-mark"><svg viewBox="0 0 240 240" aria-hidden="true"><circle cx="120" cy="120" r="114" fill="#3A1442"/><circle cx="120" cy="120" r="114" fill="none" stroke="#E2B15C" stroke-width="7"/><circle cx="120" cy="120" r="98" fill="none" stroke="#E2B15C" stroke-width="2" stroke-dasharray="3 7"/><path d="M120 36 l4 9 9 4 -9 4 -4 9 -4 -9 -9 -4 9 -4z" fill="#E2B15C"/><text x="120" y="152" text-anchor="middle" font-family="Bodoni Moda, Didot, serif" font-size="80" fill="#E2B15C" letter-spacing="2">AD</text><text x="120" y="190" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="700" font-size="13" letter-spacing="5" fill="#E2B15C">AKWI · DAILY</text></svg></span><span class="wordmark">Akwi <i>Daily</i></span></a>
     <nav class="topnav" aria-label="Site menu">
       <a class="tn" href="#shop" data-go="all" data-sec="shop"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 12.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg><span class="tl">Shop</span></a>
       <div class="ex">
@@ -538,7 +578,7 @@ button.ph{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inheri
       <div class="sec-head">
         <div><span class="eyebrow">The Shop</span><h2>Perfumes, dresses, men's wear &amp; shoes</h2></div>
       </div>
-      <ol class="how" aria-label="How to order"><li>Tap the cart on an item</li><li>Send your order on WhatsApp</li><li>Pay after we confirm</li></ol>
+      <p class="tapline">Tap any item to see it and order. You pay only after we confirm.</p>
       <button class="back-all" id="backAll" type="button" hidden>← Back to everything</button>
       <div class="grid" id="products"></div>
       <div class="soon-row" id="soon"><div class="soon-txt"><b>More pretty things coming</b><span>New stock lands often. Leave your email and be the first to know.</span></div>
@@ -655,6 +695,21 @@ button.ph{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inheri
 
 
 <div class="scrim" id="scrim" hidden></div>
+<div class="scrim" id="iscrim" hidden></div>
+<aside class="isheet" id="isheet" hidden role="dialog" aria-modal="true" aria-labelledby="iName">
+  <button class="x ix" id="iClose" type="button" aria-label="Close">×</button>
+  <div class="iph"><img id="iImg" alt=""></div>
+  <div class="ibody">
+    <span class="brand" id="iBrand"></span>
+    <h2 id="iName"></h2>
+    <p class="idesc" id="iDesc"></p>
+    <div class="imeta"><span class="price" id="iPrice"></span><span class="ichip" id="iFeat"></span></div>
+    <p class="isize" id="iSize" hidden>Size on request. Add your size and colour in the cart.</p>
+    <div id="iAct"></div>
+    <button class="ilink" id="iMore" type="button">See more like this →</button>
+  </div>
+</aside>
+
 <aside class="drawer" id="drawer" hidden aria-label="Your cart">
   <div class="dr-head"><h2>Your cart</h2><button class="x" id="closeB" type="button" aria-label="Close cart">×</button></div>
   <div class="dr-body">
@@ -677,6 +732,7 @@ button.ph{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inheri
         <ol class="momo-steps"><li>Send your order. No payment yet.</li><li>We confirm on WhatsApp that your items are in stock.</li><li>Then send the amount by MTN MoMo to the number above. Check that the name shows <b>Belinda Funying</b> before you confirm.</li></ol>
         <p class="momo-safe">We will never ask for your PIN or secret code.</p>
       </div>
+      <label class="sim"><input type="checkbox" id="cSim" checked> If an item is gone, I'm happy with a similar style</label>
       <label for="cNote" id="noteLbl">Note (optional)</label>
       <p class="need" id="needSize" hidden>Please add your size and colour for clothes and shoes.</p>
       <input id="cNote" placeholder="Size, colour, gift wrap, best time to deliver…">
@@ -756,14 +812,12 @@ const NEWIN=['Gold Bar Slides','Triple Buckle Slides','Cocoa Gloss Mules','Class
 function render(){
  const list=filter==='all'?mixed:products.filter(x=>cat(x)===filter||x.g===filter);
  const back=document.getElementById('backAll');if(back)back.hidden=filter==='all';
- grid.innerHTML=list.map(x=>`
-  <article class="product">
-   <button class="ph${wear(x)?' tall':''}" type="button" data-cat="${cat(x)}" aria-label="${filter==='all'?'See more like '+x.n:x.n}"><span class="badge">${x.f}</span>${NEWIN.includes(x.n)?'<span class="ribbon">New in</span>':''}<img src="${x.img}" alt="${wear(x)?x.n:x.b+' '+x.n+' eau de parfum, '+x.s}" loading="lazy"${x.pos?` style="object-position:${x.pos}"`:''}></button>
-   ${wear(x)?`<span class="size">${x.s}</span>`:`<span class="brand">${x.b} · ${x.s}</span>`}
-   <h3>${x.n}</h3>
-   <p class="desc">${x.d}</p>
-   <div class="meta"><span class="price">${money(x.p)}</span>${control(x)}</div>
-  </article>`).join('');
+ grid.innerHTML=list.map(x=>{const so=isOut(x),q=basket[x.img]||0;return `
+  <article class="product${so?' out':''}">
+   <button class="ph${wear(x)?' tall':''}" type="button" data-open-item="${x.img}" aria-label="See ${x.n}${so?' (sold out)':''}"><span class="badge">${x.f}</span>${so?'<span class="ribbon soldr">Sold out</span>':NEWIN.includes(x.n)?'<span class="ribbon">New in</span>':''}${q?`<span class="incart">${q} in cart</span>`:''}<img src="${x.img}" alt="${wear(x)?x.n:x.b+' '+x.n+' eau de parfum, '+x.s}" loading="lazy"${x.pos?` style="object-position:${x.pos}"`:''}></button>
+   <h3><button type="button" class="pname" data-open-item="${x.img}">${x.n}</button></h3>
+   <span class="price">${money(x.p)}</span>
+  </article>`}).join('');
 }
 function totals(){let c=0,t=0;for(const k in basket){c+=basket[k];t+=basket[k]*byImg[k].p}return{c,t}}
 function renderBasket(){
@@ -792,13 +846,13 @@ function updateSend(){
  btn.setAttribute('aria-disabled',ok?'false':'true');
  hint.textContent=!c?'Add an item to start your order.':!name?'Add your name to send your order.':momo?'Send your order now. You pay only after we confirm.':'WhatsApp opens with your order ready. Just press send.';
  const items=Object.keys(basket).map(k=>{const x=byImg[k];return `• ${basket[k]} × ${wear(x)?x.n:x.b+' '+x.n+' ('+x.s+')'} = ${money(basket[k]*x.p)}`}).join('\n');
- const msg=`Hello Akwi Daily! I'd like to order:\n${items}\n\nTotal: ${money(t)}\nName: ${name}\nDelivery area: ${area||'to confirm'}\nPayment: ${pay}${momo?' (I will pay after you confirm)':''}${note?'\nNote: '+note:''}`;
+ const msg=`Hello Akwi Daily! I'd like to order:\n${items}\n\nTotal: ${money(t)}\nName: ${name}\nDelivery area: ${area||'to confirm'}\nPayment: ${pay}${momo?' (I will pay after you confirm)':''}${note?'\nNote: '+note:''}\nIf an item is gone: ${document.getElementById('cSim').checked?'a similar style is fine':'please ask me first'}`;
  btn.href=`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
 }
-function change(k,d){basket[k]=(basket[k]||0)+d;if(basket[k]<=0)delete basket[k];save();render();renderBasket()}
+function change(k,d){basket[k]=(basket[k]||0)+d;if(basket[k]<=0)delete basket[k];save();render();renderBasket();if(cur===k)fillItem()}
 document.addEventListener('click',e=>{
  const t=e.target.closest('[data-inc],[data-dec],[data-rm]');if(!t)return;
- if(t.dataset.inc){const first=!basket[t.dataset.inc];change(t.dataset.inc,1);if(first&&totals().c===1)openB()}
+ if(t.dataset.inc){change(t.dataset.inc,1)}
  else if(t.dataset.dec)change(t.dataset.dec,-1);
  else{delete basket[t.dataset.rm];save();render();renderBasket()}
 });
@@ -819,8 +873,39 @@ document.getElementById('fields').addEventListener('input',updateSend);
 document.getElementById('copyNum').addEventListener('click',e=>{const b=e.currentTarget,n='653426739';const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)};
  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(n).then(done,done);else{const t=document.createElement('textarea');t.value=n;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(err){}t.remove();done()}});
 document.getElementById('fields').addEventListener('change',updateSend);
+// Sold out: read the "Stock" tab of the Google Sheet
+const STOCK_URL='https://docs.google.com/spreadsheets/d/1xPwCkmVjz6DUnJUT7r59x7hm-Q0snG7lLjXSz2ooDEQ/gviz/tq?tqx=out:csv&sheet=Stock';
+const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+let SOLD=new Set();
+const isOut=x=>SOLD.has(norm(x.n))||SOLD.has(norm(x.b+' '+x.n));
+let cur=null;
+fetch(STOCK_URL,{cache:'no-store'}).then(r=>r.ok?r.text():'').then(txt=>{
+ if(!txt)return;const rows=parseCSV(txt.trim());rows.shift();
+ SOLD=new Set(rows.filter(r=>/sold/i.test(r[2]||'')).map(r=>norm(r[0])));
+ for(const k in basket){if(isOut(byImg[k]))delete basket[k]}save();render();renderBasket();if(cur)fillItem();
+}).catch(()=>{});
+// Item sheet: opens when a product is tapped
+const isheet=document.getElementById('isheet'),iscrim=document.getElementById('iscrim');
+function fillItem(){const x=byImg[cur];if(!x)return;const so=isOut(x),q=basket[cur]||0;
+ const im=document.getElementById('iImg');im.src=x.img;im.alt=x.n;im.style.objectPosition=x.pos||'50% 30%';
+ document.getElementById('iBrand').textContent=wear(x)?'':x.b+' · '+x.s;
+ document.getElementById('iName').textContent=x.n;document.getElementById('iDesc').textContent=x.d;
+ document.getElementById('iPrice').textContent=money(x.p);document.getElementById('iFeat').textContent=x.f;
+ document.getElementById('iSize').hidden=!wear(x);
+ const like=encodeURIComponent(`Hello Akwi Daily! I saw "${x.n}" on your site but it's sold out. Do you have a similar style?`);
+ document.getElementById('iAct').innerHTML=so?`<p class="isold">Sold out for now.</p><a class="btn iadd ghost" href="https://wa.me/${WA}?text=${like}" target="_blank" rel="noopener">Ask for a similar style</a>`
+  :q?`<div class="iqty"><div class="step"><button type="button" data-dec="${cur}" aria-label="One less">−</button><span>${q}</span><button type="button" data-inc="${cur}" aria-label="One more">+</button></div><button class="btn iadd" type="button" id="iGo">View cart &amp; order</button></div><p class="iok">Added to your cart ✓</p>`
+  :`<button class="btn iadd" type="button" data-inc="${cur}">Add to cart</button>`;
+ const go=document.getElementById('iGo');if(go)go.onclick=()=>{closeItem();openB()};
+ document.getElementById('iMore').hidden=filter!=='all';
+}
+function openItem(k){cur=k;fillItem();isheet.hidden=false;iscrim.hidden=false;document.body.style.overflow='hidden';document.getElementById('iClose').focus()}
+function closeItem(){isheet.hidden=true;iscrim.hidden=true;document.body.style.overflow='';cur=null}
+document.getElementById('iClose').addEventListener('click',closeItem);iscrim.addEventListener('click',closeItem);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!isheet.hidden)closeItem()});
+document.getElementById('iMore').addEventListener('click',()=>{const x=byImg[cur];closeItem();setFilter(cat(x));document.getElementById('shop').scrollIntoView({behavior:'smooth'})});
 render();renderBasket();
-grid.addEventListener('click',e=>{const b=e.target.closest('button.ph');if(!b||filter!=='all')return;setFilter(b.dataset.cat);document.getElementById('shop').scrollIntoView({behavior:'smooth'})});
+grid.addEventListener('click',e=>{const b=e.target.closest('[data-open-item]');if(b)openItem(b.dataset.openItem)});
 document.getElementById('backAll').addEventListener('click',()=>{setFilter('all');document.getElementById('shop').scrollIntoView({behavior:'smooth'})});
 document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',c===b));

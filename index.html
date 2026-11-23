@@ -972,11 +972,13 @@ Promise.all([getCSV(SHEET_MAIN),getCSV(SHEET_FORM)]).then(([mainT,formT])=>{
  if(add.length){POSTS.unshift(...add);renderJournal()}
 });
 
-const INBOX='https://formsubmit.co/ajax/tahakwi05@gmail.com';
+// Messages go to the Google Form "Akwi Daily Sign-ups" (answers appear in its Responses tab)
+const FORM_URL='https://docs.google.com/forms/d/e/1FAIpQLSccdAcrMNePgyQ4y_zsoIadBrrT-biZS8Hl6ZayQuRoaj6USQ/formResponse';
+const FORM_FIELD='entry.1988012199';
 async function sendMsg(data){
- const r=await fetch(INBOX,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(Object.assign({_template:'table',_captcha:'false'},data))});
- const j=await r.json().catch(()=>({}));
- if(!r.ok||String(j.success)!=='true')throw new Error(j.message||'failed');
+ const text=Object.entries(data).map(([k,v])=>k==='_subject'?`[${v}]`:`${k}: ${v}`).join('\n');
+ const body=new URLSearchParams();body.append(FORM_FIELD,text);
+ await fetch(FORM_URL,{method:'POST',mode:'no-cors',body});
 }
 function say(el,txt,good){el.textContent=txt;el.hidden=false;el.style.background=good?'':'#F8D7DA';el.style.color=good?'':'#721C24'}
 document.getElementById('askForm').addEventListener('submit',async e=>{
